@@ -19,6 +19,8 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
 	        return appendTextBox.apply(this);
 	    } else if (functionName === Dominion.FunctionNames.AppendSelect) {
 	        return appendSelect.apply(this);
+	    } else {
+	        return this;
 	    };
 	};
 
