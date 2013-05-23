@@ -6,9 +6,10 @@
 
 var Dominion = Dominion || {};
 Dominion.FunctionNames = Dominion.FunctionNames || {};
-Dominion.FunctionNames.AppendTextBox = "AppendTextBox";
-Dominion.FunctionNames.AppendSelect = "AppendSelect";
-Dominion.FunctionNames.AppendElement = "AppendElement";
+Dominion.FunctionNames.AppendTextBox = "appendTextBox";
+Dominion.FunctionNames.AppendSelect = "appendSelect";
+Dominion.FunctionNames.AppendElement = "appendElement";
+Dominion.FunctionNames.AppendOption = "appendOption";
 
 (function ($) {
 	$.fn.Dominion = {};
@@ -33,7 +34,9 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
             return appendSelect;
         } else if (functionName === Dominion.FunctionNames.AppendElement) {
             return appendElement;
-        } else {
+        } else if (functionName === Dominion.FunctionNames.AppendOption) {
+            return appendOption;
+        }else {
             return null;
         };
     }
@@ -41,6 +44,8 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
     //options looks like 
     //{elementName:"input"
     // attributes:{attribute1Name:"attribute1Value", attribute2Name, "attribute2Value"}
+    // callback:function() {}
+    //}
 	function appendElement(options) {
 	    return this.each(function () {
 	        var el = $(document.createElement(options.elementName));
@@ -48,20 +53,35 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
 	            el.attr(attributeName, options.attributes[attributeName]);
 	        }
 
+            if (options.text) {
+                el.text(options.text);
+            }
+
 	        $(this).append(el);
+	        
+	        if (options.callBack) {
+	            options.callBack.apply(el);
+	        }
 	    });
 	};
 
-	function appendTextBox() {
-	    return appendElement.apply(this, [{
-	        elementName: "input",
-	        attributes: { type: "text" }
-	    }]);
+	function appendTextBox(options) {
+	    var absolutes = { elementName: "input", attributes: { type: "text" } };
+	    options = jQuery.extend(true, options, absolutes);
+        return appendElement.apply(this, [options]);
 	};
 
-	function appendSelect() {
-	    return appendElement.apply(this, [{ elementName: "select" }]);
+	function appendSelect(options) {
+	    var absolutes = { elementName: "select" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
 	};
+    
+	function appendOption(options) {
+	    var absolutes = { elementName: "option" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
     
     function initialise(options) {
         if (options.promoteFunctions === true) {
