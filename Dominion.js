@@ -13,16 +13,30 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
 (function ($) {
 	$.fn.Dominion = {};
 	
-	//adds a text box to each element in the list
-	$.fn.Dominion = function (functionName) {
-	    if (functionName === Dominion.FunctionNames.AppendTextBox) {
-	        return appendTextBox.apply(this);
-	    } else if (functionName === Dominion.FunctionNames.AppendSelect) {
-	        return appendSelect.apply(this);
-	    } else {
-	        return this;
-	    };
+	$.fn.Dominion = function (functionName, options) {
+	    var f = functionLookup(functionName);
+        if (f) {
+            return f.apply(this, [options]);
+        } else {
+            return this;
+        }
 	};
+
+    $.Dominion = function(options) {
+        initialise(options);
+    };
+    
+    function functionLookup(functionName) {
+        if (functionName === Dominion.FunctionNames.AppendTextBox) {
+            return appendTextBox;
+        } else if (functionName === Dominion.FunctionNames.AppendSelect) {
+            return appendSelect;
+        } else if (functionName === Dominion.FunctionNames.AppendElement) {
+            return appendElement;
+        } else {
+            return null;
+        };
+    }
 
     //options looks like 
     //{elementName:"input"
@@ -48,5 +62,22 @@ Dominion.FunctionNames.AppendElement = "AppendElement";
 	function appendSelect() {
 	    return appendElement.apply(this, [{ elementName: "select" }]);
 	};
+    
+    function initialise(options) {
+        if (options.promoteFunctions === true) {
+            for (var functionNameKey in Dominion.FunctionNames) {
+                var fName = Dominion.FunctionNames[functionNameKey];
+                if ($.fn[fName]) {
+                    throw "jQuery function nameclash with " + fName + " you will need to rename this dominion function before functions can be promoted";
+                }
+            }
+            for (var functionNameKey in Dominion.FunctionNames) {
+                var functionName = Dominion.FunctionNames[functionNameKey];
+                $.fn[functionName] = functionLookup(functionName);
+            }
+            
+        }
+        return this;
+    }
 
 })(jQuery);

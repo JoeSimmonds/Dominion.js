@@ -1,0 +1,15 @@
+Dominion Functional reqs
+========================
+
+1 Can append arbitrary elements to an existing element
+1.1 the element name can be specified
+1.2 attributes can be specified
+
+2 Can add a text input tag in a single call
+3 Can add a select tag in a single call
+
+4 plugin functions can be called using normal jQuery syntax (ie. passing the method name as a string as the first argument
+5 a set of constants for method names should be available
+6 devs can promote the Dominion methods to first class jquery methods
+7 Methods can be renamed before being promoted to avoid name clashes
+8 Name clashes that are not avoided should be detected before promotion occurs
