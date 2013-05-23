@@ -49,12 +49,17 @@ Dominion.FunctionNames.AppendOption = "appendOption";
 	function appendElement(options) {
 	    return this.each(function () {
 	        var el = $(document.createElement(options.elementName));
+	        
 	        for (var attributeName in options.attributes) {
 	            el.attr(attributeName, options.attributes[attributeName]);
 	        }
 
             if (options.text) {
                 el.text(options.text);
+            }
+
+            if (options.Id) {
+                el.attr("Id", options.Id);
             }
 
 	        $(this).append(el);
