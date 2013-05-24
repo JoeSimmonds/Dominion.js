@@ -67,8 +67,8 @@ Dominion.FunctionNames.AppendSpan = "appendSpan";
                 el.attr("Id", options.id);
             }
 
-            if(options.class){
-                el.attr("class", options.class);
+            if(options.cssClass){
+                el.attr("class", options.cssClass);
             }
             
 	        $(this).append(el);
