@@ -8,6 +8,7 @@ Dominion.FunctionNames.AppendElement = "appendElement";
 Dominion.FunctionNames.AppendOption = "appendOption";
 Dominion.FunctionNames.AppendDiv = "appendDiv";
 Dominion.FunctionNames.AppendSpan = "appendSpan";
+Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
 
 (function ($) {
 	$.fn.Dominion = {};
@@ -38,6 +39,8 @@ Dominion.FunctionNames.AppendSpan = "appendSpan";
             return appendDiv;
         } else if (functionName === Dominion.FunctionNames.AppendSpan) {
             return appendSpan;
+        } else if (functionName === Dominion.FunctionNames.AppendLineBreak) {
+            return appendLineBreak;
         }else {
             return null;
         };
@@ -93,6 +96,12 @@ Dominion.FunctionNames.AppendSpan = "appendSpan";
     
 	function appendDiv(options) {
 	    var absolutes = { elementName: "div" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}	
+    
+    function appendLineBreak(options) {
+	    var absolutes = { elementName: "br" };
 	    options = jQuery.extend(options, absolutes);
 	    return appendElement.apply(this, [options]);
 	}
