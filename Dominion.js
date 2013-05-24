@@ -1,8 +1,4 @@
 //Dominion.js
-//Items to do
-//============
-// a function to configure that allows the promotion of text based function names to first class jQuery plugin functions.
-
 
 var Dominion = Dominion || {};
 Dominion.FunctionNames = Dominion.FunctionNames || {};
@@ -10,6 +6,8 @@ Dominion.FunctionNames.AppendTextBox = "appendTextBox";
 Dominion.FunctionNames.AppendSelect = "appendSelect";
 Dominion.FunctionNames.AppendElement = "appendElement";
 Dominion.FunctionNames.AppendOption = "appendOption";
+Dominion.FunctionNames.AppendDiv = "appendDiv";
+Dominion.FunctionNames.AppendSpan = "appendSpan";
 
 (function ($) {
 	$.fn.Dominion = {};
@@ -36,6 +34,10 @@ Dominion.FunctionNames.AppendOption = "appendOption";
             return appendElement;
         } else if (functionName === Dominion.FunctionNames.AppendOption) {
             return appendOption;
+        } else if (functionName === Dominion.FunctionNames.AppendDiv) {
+            return appendDiv;
+        } else if (functionName === Dominion.FunctionNames.AppendSpan) {
+            return appendSpan;
         }else {
             return null;
         };
@@ -45,6 +47,9 @@ Dominion.FunctionNames.AppendOption = "appendOption";
     //{elementName:"input"
     // attributes:{attribute1Name:"attribute1Value", attribute2Name, "attribute2Value"}
     // callback:function() {}
+	// id:"elementId"
+	// text:"text to go inside the element"
+    // class:"cssClass1 cssClass2"
     //}
 	function appendElement(options) {
 	    return this.each(function () {
@@ -58,14 +63,14 @@ Dominion.FunctionNames.AppendOption = "appendOption";
                 el.text(options.text);
             }
 
-            if (options.Id) {
-                el.attr("Id", options.Id);
+            if (options.id) {
+                el.attr("Id", options.id);
             }
 
 	        $(this).append(el);
 	        
-	        if (options.callBack) {
-	            options.callBack.apply(el);
+	        if (options.callback) {
+	            options.callback.apply(el);
 	        }
 	    });
 	};
@@ -82,6 +87,18 @@ Dominion.FunctionNames.AppendOption = "appendOption";
 	    return appendElement.apply(this, [options]);
 	};
     
+	function appendDiv(options) {
+	    var absolutes = { elementName: "div" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+	
+	function appendSpan(options) {
+	    var absolutes = { elementName: "span" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+	
 	function appendOption(options) {
 	    var absolutes = { elementName: "option" };
 	    options = jQuery.extend(options, absolutes);
