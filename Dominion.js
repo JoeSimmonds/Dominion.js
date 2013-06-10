@@ -52,7 +52,7 @@ Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
     // callback:function() {}
 	// id:"elementId"
 	// text:"text to go inside the element"
-    // class:"cssClass1 cssClass2"
+    // cssClass:"cssClass1 cssClass2"
     //}
 	function appendElement(options) {
 	    return this.each(function () {
