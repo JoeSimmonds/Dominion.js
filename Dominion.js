@@ -56,7 +56,8 @@ Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
     //}
 	function appendElement(options) {
 	    return this.each(function () {
-	        var el = $(document.createElement(options.elementName));
+            var newEl = document.createElement(options.elementName)
+	        var el = $(newEl);
 	        
 	        for (var attributeName in options.attributes) {
 	            el.attr(attributeName, options.attributes[attributeName]);
@@ -77,7 +78,7 @@ Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
 	        $(this).append(el);
 	        
 	        if (options.callback) {
-	            options.callback.apply(el);
+	            options.callback.apply(newEl);
 	        }
 	    });
 	};
