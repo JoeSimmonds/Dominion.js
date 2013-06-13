@@ -68,3 +68,27 @@ test ("Can Set cssClass On The Element",function(){
     $fixture.Dominion("appendDiv",{cssClass:"testClass"});
     equal($("div.testClass", $fixture).length,1,"The class was set correctly");
 });
+
+test ("Callback gets called", 1, function(){
+    var $fixture = $("#qunit-fixture");
+    $fixture.Dominion("appendDiv",{callback:function(){ok(true, "callback was called");}});
+});
+
+test ("Callback is applied to new element",3,function(){
+    var $fixture = $("#qunit-fixture");
+    $fixture.Dominion("appendSpan",{id:"TestId",
+        callback:function()
+        {
+            ok(this, "'this' is defined");
+            ok($(this).is("Span"),"New element is of correct type");
+            equal($(this).attr("Id"),"TestId", "The Id is correct");
+        }});
+});
+
+test ("Callback is applied to raw DOM element (not jQuery object)", function(){
+    var $fixture = $("#qunit-fixture");
+    $fixture.Dominion("appendSpan",{callback:function()
+        {
+            ok(!(this instanceof jQuery), "Was not a jQuery object");
+        }});
+});
