@@ -1,0 +1,7 @@
+{
+  "framework":"qunit",
+  "src_files" : ["tests/jquery-1.10.1.js",
+                    "Dominion.js",
+                    "tests/tests.js"
+                    ]
+}

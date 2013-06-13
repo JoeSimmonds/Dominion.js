@@ -1,7 +1,3 @@
-test( "hello test", function() {
-  ok( 1 == "1", "Passed!" );
-});
-
 test("Can Append A Div", function(){
     var $fixture = $("#qunit-fixture");  
     $fixture.Dominion("appendDiv");
