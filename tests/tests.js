@@ -92,3 +92,73 @@ test ("Callback is applied to raw DOM element (not jQuery object)", function(){
             ok(!(this instanceof jQuery), "Was not a jQuery object");
         }});
 });
+
+test ("Constant values exist", function(){
+    ok(Dominion,"Dominion is defined");
+    ok(Dominion.FunctionNames,"Dominion.FunctionNames is defined");
+    ok(Dominion.FunctionNames.AppendTextBox,"Dominion.FunctionNames.AppendTextBox is defined");
+    ok(Dominion.FunctionNames.AppendSelect,"Dominion.FunctionNames.AppendSelect is defined");
+    ok(Dominion.FunctionNames.AppendElement,"Dominion.FunctionNames.AppendElement is defined");
+    ok(Dominion.FunctionNames.AppendOption,"Dominion.FunctionNames.AppendOption is defined");
+    ok(Dominion.FunctionNames.AppendDiv,"Dominion.FunctionNames.AppendDiv is defined");
+    ok(Dominion.FunctionNames.AppendSpan,"Dominion.FunctionNames.AppendSpan is defined");
+    ok(Dominion.FunctionNames.AppendLineBreak,"Dominion.FunctionNames.AppendLineBreak is defined");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
