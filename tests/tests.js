@@ -105,8 +105,14 @@ test ("Constant values exist", function(){
     ok(Dominion.FunctionNames.AppendLineBreak,"Dominion.FunctionNames.AppendLineBreak is defined");
 });
 
-
-
+test ("All functions get promoted", function(){
+    var $fixture = $("#qunit-fixture");
+    $.Dominion ({ promoteFunctions: true });
+    for(var idx in Dominion.FunctionNames){
+        var functionName = Dominion.FunctionNames[idx]
+        equal(typeof($fixture[functionName]),"function", functionName  + "is a first class jQuery method");
+    }
+});
 
 
 
