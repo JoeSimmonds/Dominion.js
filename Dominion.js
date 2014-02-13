@@ -9,6 +9,12 @@ Dominion.FunctionNames.AppendOption = "appendOption";
 Dominion.FunctionNames.AppendDiv = "appendDiv";
 Dominion.FunctionNames.AppendSpan = "appendSpan";
 Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
+Dominion.FunctionNames.AppendTable = "appendTable";
+Dominion.FunctionNames.AppendTableRow = "appendTableRow";
+Dominion.FunctionNames.AppendTableCell = "appendTableCell";
+Dominion.FunctionNames.AppendTableHeaderCell = "appendTableHeaderCell";
+
+
 
 (function ($) {
 	$.fn.Dominion = {};
@@ -41,7 +47,15 @@ Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
             return appendSpan;
         } else if (functionName === Dominion.FunctionNames.AppendLineBreak) {
             return appendLineBreak;
-        }else {
+        } else if (functionName === Dominion.FunctionNames.AppendTable) {
+			return appendTable;
+		} else if (functionName === Dominion.FunctionNames.AppendTableRow) {
+			return appendTableRow;
+		} else if (functionName === Dominion.FunctionNames.AppendTableCell) {
+			return appendTableCell;
+		} else if (functionName === Dominion.FunctionNames.AppendTableHeaderCell) {
+			return appendTableHeaderCell;
+		} else {
             return null;
         };
     }
@@ -115,6 +129,30 @@ Dominion.FunctionNames.AppendLineBreak = "appendLineBreak";
 	
 	function appendOption(options) {
 	    var absolutes = { elementName: "option" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+	
+	function appendTable(options) {
+	    var absolutes = { elementName: "table" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+
+	function appendTableRow(options) {
+	    var absolutes = { elementName: "tr" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+	
+	function appendTableCell(options) {
+	    var absolutes = { elementName: "td" };
+	    options = jQuery.extend(options, absolutes);
+	    return appendElement.apply(this, [options]);
+	}
+
+	function appendTableHeaderCell(options) {
+	    var absolutes = { elementName: "th" };
 	    options = jQuery.extend(options, absolutes);
 	    return appendElement.apply(this, [options]);
 	}
