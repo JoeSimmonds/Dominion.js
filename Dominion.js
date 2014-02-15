@@ -13,8 +13,7 @@ Dominion.FunctionNames.AppendTable = "appendTable";
 Dominion.FunctionNames.AppendTableRow = "appendTableRow";
 Dominion.FunctionNames.AppendTableCell = "appendTableCell";
 Dominion.FunctionNames.AppendTableHeaderCell = "appendTableHeaderCell";
-
-
+Dominion.FunctionNames.Autoview = "autoview";
 
 (function ($) {
 	$.fn.Dominion = {};
@@ -55,6 +54,8 @@ Dominion.FunctionNames.AppendTableHeaderCell = "appendTableHeaderCell";
 			return appendTableCell;
 		} else if (functionName === Dominion.FunctionNames.AppendTableHeaderCell) {
 			return appendTableHeaderCell;
+		} else if (functionName === Dominion.FunctionNames.Autoview) {
+			return autoview;
 		} else {
             return null;
         };
@@ -155,6 +156,32 @@ Dominion.FunctionNames.AppendTableHeaderCell = "appendTableHeaderCell";
 	    var absolutes = { elementName: "th" };
 	    options = jQuery.extend(options, absolutes);
 	    return appendElement.apply(this, [options]);
+	}
+	
+	function autoview(options) {
+		var defaults={mode:"standard", includeLabels:false, elementName:"div"};
+		options = jQuery.extend(defaults, options);
+		for (var prop in options.data){
+			var elementDef = {
+				text:"",
+				elementName:options.elementName, 
+				cssClass:"dominion-autoview " + prop };
+			
+			if (typeof(options.data[prop]) === "object"){
+				elementDef.callback = function(){
+						var newOpts = jQuery.extend({}, options, {data:options.data[prop]});
+						autoview.apply($(this), [newOpts]);
+					};
+			} else {
+				elementDef.text = options.data[prop];
+			}
+			
+			if (options.includeLabels){
+				elementDef.text = prop + "=" + elementDef.text;
+			}
+			
+			appendElement.apply(this, [elementDef]);
+		} 
 	}
     
     function initialise(options) {
